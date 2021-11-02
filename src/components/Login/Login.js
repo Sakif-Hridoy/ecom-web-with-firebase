@@ -4,7 +4,10 @@ import '../Login/Login.css';
 import { useContext, useState } from 'react';
 import firebaseConfig from './firebase.config';
 import { UserContext } from '../../App';
+import { useHistory, useLocation } from 'react-router';
 firebase.initializeApp(firebaseConfig);
+
+
 function Login() {
 const [newUser,setNewUser]=useState(false);
 
@@ -19,6 +22,11 @@ const [newUser,setNewUser]=useState(false);
   });
 
   const [loggedInUser,setLoggedInUser] = useContext(UserContext);
+  const history = useHistory();
+  const location = useLocation();
+  let { from } = location.state || { from: { pathname: "/" } };
+
+
   console.log(user)
   // Google Sign IN
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -139,6 +147,7 @@ const handleSubmit = (e)=>{
       newUserInfo.success= true;
       setUser(newUserInfo);
       setLoggedInUser(newUserInfo);
+      history.replace(from);
       console.log('sign in user info',res.user)
   })
   .catch((error) => {

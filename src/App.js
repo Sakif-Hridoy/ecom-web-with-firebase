@@ -24,8 +24,8 @@ function App(props) {
   return (
     <UserContext.Provider value = {[loggedInUser,setLoggedInUser]}>
       <h3>login email:{loggedInUser.email}</h3>
-      <Header></Header>
       <Router>
+      <Header></Header>
         <Switch>
           <Route path="/shop">
           <Shop></Shop>
@@ -33,9 +33,9 @@ function App(props) {
           <Route path="/review">
           <Review></Review>
           </Route>
-          <Route path="/inventory">
+          <PrivateRoute path="/inventory">
           <Inventory></Inventory>
-          </Route>
+          </PrivateRoute>
           <Route path="/login">
           <Login></Login>
           </Route>
