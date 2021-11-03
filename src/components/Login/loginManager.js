@@ -16,7 +16,8 @@ return firebase.auth().signInWithPopup(provider)
         isSignedIn: true,
         name:displayName,
         email:email,
-        photo:photoURL
+        photo:photoURL,
+        success:true
       }
        return signedInUser;
     })
@@ -78,68 +79,63 @@ export const handleGoogleSignOut=()=>{
 //   }
 
   
-// export const createUserWithEmailAndPassword = ()=>{
-//     firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-//         .then(res=>{
-//           console.log(res);
-//           const newUserInfo = res.user; /*check here if any error*/
-//           newUserInfo.error = '';
-//           newUserInfo.success= true;
-//           setUser(newUserInfo);
-//           updateUserName(user.name);
-//           console.log(user.name)
+export const createUserWithEmailAndPassword = (name,email,password)=>{
+return firebase.auth().createUserWithEmailAndPassword(email,password)
+        .then(res=>{
+          console.log(res);
+          const newUserInfo = res.user; /*check here if any error*/
+          newUserInfo.error = '';
+          newUserInfo.success= true;
+          updateUserName(name);
+          return newUserInfo;
           
-//         })
-//       .catch(error => {
-//         const newUserInfo = {...user};
-//         newUserInfo.error = error.message;
-//         newUserInfo.success= false;
-//         setUser(newUserInfo);
-        
-//         console.log(error,error.message);
-//         // var errorCode = error.code;
-//         // var errorMessage = error.message;
-//         // console.log(errorCode,errorMessage)
-//         // ..
-//       });
-// }
+        })
+      .catch(error => {
+        const newUserInfo = {};
+        newUserInfo.error = error.message;
+        newUserInfo.success= false;
+        return newUserInfo;
+        // console.log(error,error.message);
+        // var errorCode = error.code;
+        // var errorMessage = error.message;
+        // console.log(errorCode,errorMessage)
+        // ..
+      });
+}
 
 
-// export const signInWithEmailAndPassword = ()=>{
-//     firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-//       .then(res=>{
-//         const newUserInfo = {...user};
-//           newUserInfo.error = '';
-//           newUserInfo.success= true;
-//           setUser(newUserInfo);
-//           setLoggedInUser(newUserInfo);
-//           history.replace(from);
-//           console.log('sign in user info',res.user)
-//       })
-//       .catch((error) => {
-//         const newUserInfo = {...user};
-//         newUserInfo.error = error.message;
-//         newUserInfo.success= false;
-//         setUser(newUserInfo);
-//       });
-// }
+export const signInWithEmailAndPassword = (email,password)=>{
+  return firebase.auth().signInWithEmailAndPassword(email,password)
+      .then(res=>{
+        const newUserInfo = res.user;
+          newUserInfo.error = '';
+          newUserInfo.success= true;
+          return newUserInfo;
+      })
+      .catch((error) => {
+        const newUserInfo = {};
+        newUserInfo.error = error.message;
+        newUserInfo.success= false;
+        return newUserInfo;
+      });
+}
 
-// const updateUserName = name =>{
-//     console.log(name)
-//     const user = firebase.auth().currentUser;
+const updateUserName = name =>{
+    console.log(name)
+    const user = firebase.auth().currentUser;
   
-//       user.updateProfile({
-//         displayName: name
+      user.updateProfile({
+        displayName: name
         
     
-//     }).then((result) => {
-//       // Update successful
-//       // ...
-//       console.log(result,"user name updated Successfully")
-//     }).catch((error) => {
-//       // An error occurred
-//       // ...
-//       console.log(error)
-//     });  
-//     }
+    }).then((result) => {
+      // Update successful
+      // ...
+      console.log(result,"user name updated Successfully")
+    }).catch((error) => {
+      // An error occurred
+      // ...
+      console.log(error)
+    });  
+    }
   
