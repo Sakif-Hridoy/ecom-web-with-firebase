@@ -4,6 +4,7 @@
 
 .header{
     text-align: center;
+    background-color: white!important;
 }
 
 .header nav{
@@ -17,7 +18,7 @@ nav a{
     text-decoration: none;
     color: white;
     margin-right: 20px;
-    padding: 5px;
+    padding: 0px;
 }
 
 nav a:hover{

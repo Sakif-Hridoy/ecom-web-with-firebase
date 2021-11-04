@@ -1,4 +1,3 @@
-
 import '../Login/Login.css';
 import { useContext, useState } from 'react';
 
@@ -94,8 +93,8 @@ const [newUser,setNewUser]=useState(false);
   return (
     <div className="Login">
      {
-       user.isSignedIn ? <button onClick={googleSignOut}>Google Sign Out</button> :
-       <button onClick={googleSignIn}>Google Sign In</button>
+       user.isSignedIn ? <button className="signInOutBtn" onClick={googleSignOut}>Google Sign Out</button> :
+       <button className="signInOutBtn" onClick={googleSignIn}>Google Sign In</button>
        }
        <br />
        {/* <button onClick={facebookSignIn}>Sign In with Facebook</button> */}
@@ -108,8 +107,8 @@ const [newUser,setNewUser]=useState(false);
      } 
 
      <h1>Our OWN Authentication</h1>
-     <input type="checkbox" onChange={()=>setNewUser(!newUser)} name="newUser" id=""/>
-     <label htmlFor="newUser">New User Sign up</label>
+     <input type="checkbox" onChange={()=>setNewUser(!newUser)} name="newUser" id=""/><label htmlFor="newUser">New User Sign up</label>
+     
      <form onSubmit={handleSubmit}>
       
      { newUser && <input type="text" name="name" onBlur={handleBlur} placeholder="Your Name"/>}
